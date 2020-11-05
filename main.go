@@ -5,15 +5,16 @@ import (
 	"fmt"
 )
 
-// Ellipcic curve P256
+// Ellipcic curve P256. Reference:
+// https://golang.org/src/crypto/elliptic/elliptic.go
 var curve = elliptic.P256()
 
 /*
-	Public parameters:
-	P       *big.Int // the order of the underlying field
-	N       *big.Int // the order of the base point
-	B       *big.Int // the constant of the curve equation
-	Gx, Gy  *big.Int // (x,y) of the base point
+Public parameters:
+P       *big.Int // the order of the underlying field
+N       *big.Int // the order of the base point
+B       *big.Int // the constant of the curve equation
+Gx, Gy  *big.Int // (x,y) of the base point
 */
 var params = curve.Params()
 
@@ -24,16 +25,16 @@ const B = 32
 func main() {
 
 	// Generate private key k,
-	// and publik key K.
+	// and public key K.
 	k, Kx, Ky := KeyGen()
 
 	// Initiate communication.
 	// Generate random numbers t and r,
-	// and compute P = r*T, T = Hash(t).
+	// and compute T = Hash(t) and P = r*T.
 	t, r, Px, Py := Initiate()
 
 	// Generate token Q = k*P, and create
-	// proof (c,z) of correctness, given K.
+	// proof (c,z) of correctness, given G and K.
 	Qx, Qy, c, z := GenerateToken(Px, Py, Kx, Ky, k)
 
 	// Randomise the token Q, by removing

@@ -26,7 +26,8 @@ func HashToCurve(t []byte) (Tx *big.Int, Ty *big.Int) {
 }
 
 // CreateChallenge hash all informaion into B Bytes.
-// There is probably a more elegant way to do this :)
+// Reference: https://golang.org/pkg/crypto/sha256.
+// There is probably a more elegant way to do this.
 func CreateChallenge(Px, Py, Qx, Qy, Kx, Ky, Ax, Ay, Bx, By *big.Int) (c [B]byte) {
 	bytes := append(params.Gx.Bytes(), params.Gx.Bytes()...)
 	list := []big.Int{*Px, *Py, *Qx, *Qy, *Kx, *Ky, *Ax, *Ay, *Bx, *By}
