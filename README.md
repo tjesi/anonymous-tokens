@@ -5,15 +5,15 @@ This is joint work by [Tjerand Silde](https://tjerandsilde.no) and [Martin Stran
 We present a simple protocol for anonymous tokens. The real world situation in mind is the Norwegian contract tracing app Smittestopp 2.0. We have three parties in our protocol: Smittestopp Backend, Smittestopp App and Smittestopp Verification. More information about the setting can be found in the [Fhi.Smittestopp.Documentation](https://github.com/folkehelseinstituttet/Fhi.Smittestopp.Documentation) repository.
 
 The situation is the following:
-- Smittestopp App (SA) initiate contact with Smittestopp Verification (SV) to report on a positive test. The user authenticate himself.
-- SV verify that the user tested positive, and issue a token to SA.
-- SA send the token to Smittestopp Backend (SB) together with his diagnosis keys.
-- SB verify the token, and conditionally accept the keys and send them to all users in the system.
+- Smittestopp App (SA) initiate contact with Smittestopp Verification (SV) to report on a positive test. The user authenticates himself.
+- SV verifies that the user has tested positive, and issues a token to SA.
+- SA sends the token to Smittestopp Backend (SB) together with his diagnosis keys.
+- SB verifies the token, and conditionally accept the keys and sends them to all users in the system.
 
 We give a [brief analysis (in Norwegian)](/documents/Ytterligere.forsterket.personvern.i.Smittestopp.2.0.pdf) of the security of this protocol, and point out that a it is possible to correlate a user with his diagnosis keys, for example if SV and SB share their list of tokens. In our updated protocol we give a solution for randomised tokens that make it infeasible to make this connection, and hence, increase the privacy of the user. It goes as following:
 
-- SA sample a seed and send a masked nonce computed from the seed to SV when initiating contact.
-- SV sign the masked nonce as a token, and prove that it used the correct signing key.
+- SA samples a seed and sends a masked nonce computed from the seed to SV when initiating contact.
+- SV signs the masked nonce as a token, and proves that it used the correct signing key.
 - SA verifies the proof, and conditionally unmask the token before it sends it to SB together with the seed.
 - SB verifies that the randomised token was correctly computed with respect to the seed.
 
