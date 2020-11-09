@@ -2,7 +2,7 @@
 
 This is joint work by [Tjerand Silde](https://tjerandsilde.no) and [Martin Strand](https://twitter.com/martinstrand). Code is written by Tjerand.
 
-We present a simple protocol for anonymous tokens. The real world situation in mind is the Norwegian contract tracing app Smittestopp 2.0. We have three parties in our protocol: Smittestopp Backend, Smittestopp App and Smittestopp Verification. More information about the setting can be found in the [Fhi.Smittestopp.Documentation](https://github.com/folkehelseinstituttet/Fhi.Smittestopp.Documentation) repository.
+We present a simple protocol for anonymous tokens. The real world situation in mind is the Norwegian contact tracing app Smittestopp 2.0. We have three parties in our protocol: Smittestopp Backend, Smittestopp App and Smittestopp Verification. More information about the setting can be found in the [Fhi.Smittestopp.Documentation](https://github.com/folkehelseinstituttet/Fhi.Smittestopp.Documentation) repository.
 
 The situation is the following:
 - Smittestopp App (SA) initiate contact with Smittestopp Verification (SV) to report on a positive test.
