@@ -1,8 +1,10 @@
 # anonymous-tokens
 
-This is joint work by [Tjerand Silde](https://tjerandsilde.no) and [Martin Strand](https://twitter.com/martinstrand). This work is currently being implemented in C# in cooperation with [Henrik Walker Moe](https://no.linkedin.com/in/henrikwalkermoe). Check out the repository at [github.com/HenrikWM/anonymous-tokens](https://github.com/HenrikWM/anonymous-tokens).
+WARNING: THIS IS A PROOF OF CONCEPT AND SHOULD NOT BE USED IN PRACICE
 
-We present a simple protocol for anonymous tokens. The real world situation in mind is the Norwegian contact tracing app Smittestopp 2.0. We have three parties in our protocol: Smittestopp Backend, Smittestopp App and Smittestopp Verification. More information about the setting can be found in the [Fhi.Smittestopp.Documentation](https://github.com/folkehelseinstituttet/Fhi.Smittestopp.Documentation) repository.
+This is joint work by [Tjerand Silde](https://tjerandsilde.no) and [Martin Strand](https://twitter.com/martinstrand). This work is implemented securely in C# in cooperation with [Henrik Walker Moe](https://no.linkedin.com/in/henrikwalkermoe). Check out the repository at [github.com/HenrikWM/anonymous-tokens](https://github.com/HenrikWM/anonymous-tokens).
+
+We present a simple protocol for anonymous tokens. The real world situation in mind is the Norwegian contact tracing app Smittestopp 2.0. We have three players in our protocol: Smittestopp Backend, Smittestopp App and Smittestopp Verification. More information about the setting can be found in the [Fhi.Smittestopp.Documentation](https://github.com/folkehelseinstituttet/Fhi.Smittestopp.Documentation) repository.
 
 The situation is the following:
 - Smittestopp App (SA) initiate contact with Smittestopp Verification (SV) to report on a positive test.
