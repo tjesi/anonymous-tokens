@@ -15,7 +15,7 @@ func KeyGen() (k []byte, Kx, Ky *big.Int) {
 
 // Initiate sample random t,r of B Bytes,
 // hash t to curve as T, and compute
-// P = r*T. Returns (t,r,Px,Py).
+// P = [r]*T. Returns (t,r,Px,Py).
 func Initiate() (t, r []byte, Px, Py *big.Int) {
 
 	r = RandomBytes()
@@ -28,13 +28,13 @@ func Initiate() (t, r []byte, Px, Py *big.Int) {
 		Tx, Ty = HashToCurve(t)
 	}
 
-	// Compute P = r*T.
+	// Compute P = [r]*T.
 	Px, Py = curve.ScalarMult(Tx, Ty, r)
 	return
 }
 
 // GenerateToken use the private key to compute
-// Q = k*P, and creates a proof (c,z) that k is
+// Q = [k]*P, and creates a proof (c,z) that k is
 // used to compute Q and K from P and G, respectively.
 func GenerateToken(Px, Py, Kx, Ky *big.Int, k []byte) (Qx, Qy *big.Int, c [B]byte, z []byte) {
 	Qx, Qy = curve.ScalarMult(Px, Py, k[:])
@@ -43,7 +43,7 @@ func GenerateToken(Px, Py, Kx, Ky *big.Int, k []byte) (Qx, Qy *big.Int, c [B]byt
 }
 
 // RandomiseToken remove the mask r of Q, and
-// returns W = (1/r)*Q = k*P. First, it checks
+// returns W = [(1/r)]*Q = k*P. First, it checks
 // that the proof (c,z) is correct.
 func RandomiseToken(Px, Py, Qx, Qy, Kx, Ky *big.Int, c [B]byte, z, r []byte) (Wx, Wy *big.Int) {
 
