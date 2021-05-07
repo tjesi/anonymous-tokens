@@ -29,7 +29,7 @@ func HashToCurve(t []byte) (Tx *big.Int, Ty *big.Int) {
 // Reference: https://golang.org/pkg/crypto/sha256.
 // There is probably a more elegant way to do this.
 func CreateChallenge(Px, Py, Qx, Qy, Kx, Ky, Ax, Ay, Bx, By *big.Int) (c [B]byte) {
-	bytes := append(params.Gx.Bytes(), params.Gx.Bytes()...)
+	bytes := append(params.Gx.Bytes(), params.Gy.Bytes()...)
 	list := []big.Int{*Px, *Py, *Qx, *Qy, *Kx, *Ky, *Ax, *Ay, *Bx, *By}
 	for _, element := range list {
 		bytes = append(bytes, element.Bytes()...)
@@ -39,11 +39,11 @@ func CreateChallenge(Px, Py, Qx, Qy, Kx, Ky, Ax, Ay, Bx, By *big.Int) (c [B]byte
 }
 
 // CreateProof creates a proof (c,z) proving
-// that Q = *P and K = k*G without revealing k.
+// that Q = [k]*P and K = [k]*G without revealing k.
 func CreateProof(Px, Py, Qx, Qy, Kx, Ky *big.Int, k []byte) (c [B]byte, z []byte) {
 
 	// Generate random mask r, and
-	// then compute A = rP and B = rG
+	// then compute A = [r]*P and B = [r]*G
 	r := RandomBytes()
 	Ax, Ay := curve.ScalarMult(Px, Py, r)
 	Bx, By := curve.ScalarBaseMult(r)
@@ -65,12 +65,12 @@ func CreateProof(Px, Py, Qx, Qy, Kx, Ky *big.Int, k []byte) (c [B]byte, z []byte
 func VerifyProof(Px, Py, Qx, Qy, Kx, Ky *big.Int, c [B]byte, z []byte) bool {
 	var x1, x2, y1, y2 *big.Int
 
-	// Compute zP+cQ = rP = A
+	// Compute [z]*P+[c]*Q = [r]*P = A
 	x1, y1 = curve.ScalarMult(Px, Py, z)
 	x2, y2 = curve.ScalarMult(Qx, Qy, c[:])
 	Ax, Ay := curve.Add(x1, y1, x2, y2)
 
-	// Compute zG+cK = rG = B
+	// Compute [z]*G+[c]*K = [r]*G = B
 	x1, y1 = curve.ScalarBaseMult(z)
 	x2, y2 = curve.ScalarMult(Kx, Ky, c[:])
 	Bx, By := curve.Add(x1, y1, x2, y2)
