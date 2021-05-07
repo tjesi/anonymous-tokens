@@ -30,15 +30,15 @@ func main() {
 
 	// Initiate communication.
 	// Generate random numbers t and r,
-	// and compute T = Hash(t) and P = r*T.
+	// and compute T = Hash(t) and P = [r]*T.
 	t, r, Px, Py := Initiate()
 
-	// Generate token Q = k*P, and create
+	// Generate token Q = [k]*P, and create
 	// proof (c,z) of correctness, given G and K.
 	Qx, Qy, c, z := GenerateToken(Px, Py, Kx, Ky, k)
 
 	// Randomise the token Q, by removing
-	// the mask r: W = (1/r)*Q = k*P.
+	// the mask r: W = [(1/r)]*Q = [k]*P.
 	// Also checks that proof (c,z) is correct.
 	Wx, Wy := RandomiseToken(Px, Py, Qx, Qy, Kx, Ky, c, z, r)
 
