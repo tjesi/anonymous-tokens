@@ -1,6 +1,6 @@
 # anonymous-tokens
 
-WARNING: THIS IS A PROOF OF CONCEPT AND SHOULD NOT BE USED IN PRACICE
+WARNING: THIS IS A PROOF OF CONCEPT AND SHOULD NOT BE USED IN PRACTICE
 
 This is joint work by [Tjerand Silde](https://tjerandsilde.no) and [Martin Strand](https://twitter.com/martinstrand). This work is implemented securely in C# in cooperation with [Henrik Walker Moe](https://no.linkedin.com/in/henrikwalkermoe). Check out the repository at [github.com/HenrikWM/anonymous-tokens](https://github.com/HenrikWM/anonymous-tokens).
 
